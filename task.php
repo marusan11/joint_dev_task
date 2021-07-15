@@ -41,8 +41,9 @@ print("#####q4#####".PHP_EOL);
 $sports = ["サッカー", "フットサル", null, "野球", "バスケ", null, "バレー"];
 
   # 以下に回答を記載
-  $auniqu = array_unique($sports);
-  print_r($sports);
+  $result = array_diff($sports,array(null));
+  $result = array_values($result);
+  print_r($result);
 echo PHP_EOL;
 ?>
 
