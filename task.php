@@ -6,7 +6,8 @@ print("#####q1#####".PHP_EOL);
 $names = ["田中", "佐藤", "佐々木", "高橋"];
 
   # 以下に回答を記載
-  $names[4]= "斉藤";
+  $names[]= "斉藤";
+  // $array_push($name,"斉藤")でも可;
   print_r($names);
   echo PHP_EOL;
 ?>
@@ -27,12 +28,14 @@ print("#####q3#####".PHP_EOL);
 $numbers = [1, 5, 8, 10, 2, 3, 2, 3, 1, 4, 5, 9];
 
   # 以下に回答を記載
-  $numbers_cunt = array_count_values($numbers);
-  foreach($numbers_cunt as $key => $value){
-    if($key == 3){
-    echo $value;
+  //task_answer参照
+  $count = 0;
+  foreach($numbers as $number){
+    if($number == 3){
+      $count++;
+    }
   }
-}
+  print_r($count."回".PHP_EOL);
 echo PHP_EOL;
 ?>
 
@@ -41,8 +44,8 @@ print("#####q4#####".PHP_EOL);
 $sports = ["サッカー", "フットサル", null, "野球", "バスケ", null, "バレー"];
 
   # 以下に回答を記載
-  $result = array_diff($sports,array(null));
-  $result = array_values($result);
+  $result = array_diff($sports,[null]);
+  $result = array_values($result); //配列の全ての値を順番に返す
   print_r($result);
 echo PHP_EOL;
 ?>
@@ -58,7 +61,6 @@ $array2 = [1, 5, 8, 10];
   }else{
     echo "false";
   }
-  
   echo PHP_EOL;
 
   if(empty($array2)){
@@ -66,29 +68,57 @@ $array2 = [1, 5, 8, 10];
   }else{
     echo "false";
   }
+  echo PHP_EOL;
+
+  //その他の回答法(task_answerより)
+  //var_export — 変数の文字列表現を出力または返す
+    // $array1 = [];
+    // var_export(empty($array1));
+    // echo PHP_EOL;
+
+    // $array2 = [1, 5, 8, 10];
+    // var_export(empty($array2));
+    // echo PHP_EOL;
 echo PHP_EOL;
 ?>
+
+<?php
 print("#####q6#####".PHP_EOL);
 $numbers1 = [1, 2, 3, 4, 5];
 
   # 以下に回答を記載
-
+  function multiple_number($numbers1){
+    return $numbers1*10;
+  }
+  $numbers2 = array_map('multiple_number' ,$numbers1);
+  print_r($numbers2); 
 echo PHP_EOL;
+?>
 
+<?php
 print("#####q7#####".PHP_EOL);
 $array = ["1", "2", "3", "4", "5"];
 
   # 以下に回答を記載
-
+  $array = array_map('intval',$array);
+  //指定した変数を整数型に変換する関数 intval()
+  
   # 以下は変更しないで下さい
 var_dump($array);
 
 echo PHP_EOL;
+?>
 
+<?php
 print("#####q8#####".PHP_EOL);
 $programming_languages = ["php", "ruby", "python", "javascript"];
 
   # 以下に回答を記載
+  $programming_languages = array_map('ucfirst',$programming_languages);
+  //ucfirstは、最初の1文字を大文字に変換する関数。
+
+  $upper_case_programming_languages = array_map('strtoupper',$programming_languages); 
+  //stroupper:指定した文字列のアルファベット（英字）部分を大文字に変換する関数
 
   # 以下は変更しないで下さい
 print_r($programming_languages);
@@ -96,12 +126,26 @@ echo PHP_EOL;
 print_r($upper_case_programming_languages);
 
 echo PHP_EOL;
+?>
 
+<?php
 print("#####q9#####".PHP_EOL);
 $names = ["田中", "佐藤", "佐々木", "高橋"];
 
   # 以下に回答を記載
+  // $names = [1 => "田中", "佐藤", "佐々木", "高橋"];
+  // foreach($names as $key => $value){
+  //   echo ("会員No.".$key." ".$value.PHP_EOL);
+  // }
 
+  //期待結果でずtask_anser参照
+  $names2 = [];
+  foreach($names as $key => $name){
+    $number = $key + 1;
+    $name2 = "会員No.".$number." ".$name;
+    array_push($names2,$name2);//$names2にたいして$name2をarray_pushで要素を配列の最後に追加する
+  } 
+  print_r($names2);
 echo PHP_EOL;
 
 print("#####q10#####".PHP_EOL);
