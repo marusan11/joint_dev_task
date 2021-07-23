@@ -154,15 +154,16 @@ print("#####q10#####".PHP_EOL);
 $foods = ["いか", "たこ", "うに", "しゃけ", "うにぎり", "うに軍艦", "うに丼", "高級なうに"];
 
   # 以下に回答を記載
-  $sarch = "うに";
-  $key = in_array($sarch,$foods);
-  //in_array関数:配列の中に特定の値が含まれているかどうか調べる時に使用。ある場合はture,ない場合はfalse。
 
-  if($key){
-    print_r("好物です");
+  //正規表現で文字列検索するにはpreg_match関数
+  //preg_match(正規表現, 検索対象文字)
+foreach($foods as $food){
+  if(preg_match('/うに/',$food)){
+    print_r("好物です".PHP_EOL);
   }else{
-    print_r("まあまあ好です");
+    print_r("まあまあ好きです".PHP_EOL);
   }
+}
 echo PHP_EOL;
 ?>
 
@@ -210,8 +211,7 @@ print("#####q12#####".PHP_EOL);
 $data = ["user" => ["name" => "satou", "age" => 33]];
 
   # 以下に回答を記載
-  $user = $data["user"];
-  print_r($user["name"]);
+  print_r($data[user][name]);
 echo PHP_EOL;
 ?>
 
@@ -240,7 +240,7 @@ $data = ["name" => "satou", "age" => 33, "address" => "saitama", "hobby" => "soc
     //array_push:配列の最後に要素を追加する
   }
   print_r($new_data);
-  //keyがなくなり、展示配列として出力される。
+  //keyがなくなり、添字配列として出力される。
 
 
   # 以下は変更しないで下さい
@@ -248,14 +248,28 @@ var_dump($array);
 echo PHP_EOL;
 ?>
 
+<?php
 print("#####q15#####".PHP_EOL);
 $data1 = ["name" => "saitou", "hobby" => "soccer", "age" => 33, "role" => "admin"];
 $data2 = ["name" => "yamada", "hobby" => "baseball", "role" => "normal"];
 
   # 以下に回答を記載
+  //array_key_exists():配列の特定のキーの有無を調べる
+  //array_key_exists(キー,対象の配列);
+  if(array_key_exists(age,$data1)){
+    print_r("OK".PHP_EOL);
+  }else{
+    print_r("NG".PHP_EOL);
 
+  }if(array_key_exists(age,$data2)){
+    print_r("OK".PHP_EOL);
+  }else{
+    print_r("NG".PHP_EOL);
+  }
 echo PHP_EOL;
+?>
 
+<?php
 print("#####q16#####".PHP_EOL);
 $users = [
   ["name" => "satou", "age" => 22],
@@ -265,15 +279,36 @@ $users = [
 ];
 
   # 以下に回答を記載
-
+  foreach($users as $key => $user){
+    print_r("私の名前は".$user["name"]."です。 年齢は".$user["age"]."歳です。".PHP_EOL);
+  }
 echo PHP_EOL;
-
+?>
+<?php
 print("#####q17#####".PHP_EOL);
 class User
 {
 
   # コードを追加
+  //変数(プロパティ)を作成
+  private $name;
+  private $age;
+  private $gender;
 
+  //constructメソッド(関数)作成
+  //上記の変数の代入にならない様に変数名を$user_とつける。
+  public function __construct($user_name,$user_age,$user_gender) {
+      $this->name = $user_name;
+      $this->age = $user_age;
+      $this->gender = $user_gender;
+  }
+    
+  public function info() {
+    print("名前:".$this->name.PHP_EOL);
+    print("年齢:".$this->age.PHP_EOL);
+    print("性別:".$this->gender.PHP_EOL);
+  }
+ 
 }
 
 $user1 = new User("神里", 32, "男");
@@ -284,10 +319,32 @@ print("-------------".PHP_EOL);
 $user2->info();
 
 echo PHP_EOL;
+?>
 
+<?php
 print("#####q18#####".PHP_EOL);
 
   # コードを追加
+  class Man {
+    private $name;
+    private $age;
+
+    public function __construct($man_name,$man_age) {
+        $this->name = $man_name;
+        $this->age = $man_age;
+    }
+  
+    public function introduce() {
+      //if文で年齢を用いた場合分け
+        if($this->age >= 20) {
+          print("こんにちは,".$this->name."と申します。宜しくお願いいたします。".PHP_EOL);
+        }else{
+          print("はいさいまいど〜,".$this->name."です！！！".PHP_EOL);
+        }
+    }
+
+  }
+  
 
 $man1 = new Man("あじー", 32);
 $man2 = new Man("ゆたぼん", 10);
@@ -296,12 +353,15 @@ $man1->introduce();
 $man2->introduce();
 
 echo PHP_EOL;
+?>
 
+<?php
 print("#####q19#####".PHP_EOL);
 class Item{
   # 以下を修正して下さい
-
-  protected $name;
+//アクセス修飾子：privateとprotectedはクラス内または派生クラスからのみアクセス可能。
+//今回はクラス外からアクセスしようとしているのでアクセス修飾子のpublicに変更する必要がある。
+  public $name;
 
   function __construct($book_name){
     $this->name = $book_name;
@@ -313,20 +373,51 @@ $book = new Item("ゼロ秒思考");
 print($book->name.PHP_EOL);
 
 echo PHP_EOL;
+?>
 
+<?php
 print("#####q20#####".PHP_EOL);
 class Human
 {
 
   # コードを追加
+    //変数を用意
+    public $name;
+    public $age;
 
+    //メソッド
+    function __construct($user_name,$user_age) {
+        $this->name = $user_name;
+        $this->age = $user_age;
+    }
 }
 
 class Zoo
 {
 
   # コードを追加
+    //変数を用意
+    protected $zoo_name;
+    protected $fee;
 
+    //メソッド
+    function __construct($zoo_name,$zoo_entry_fee) {
+      $this->zoo = $zoo_name;
+      $this->entry_fee = $zoo_entry_fee;
+    }
+//引数にクラスのインスタンス？？？？？？？？？？↓
+    function info_entry_fee(Human $human) {
+      if($human->age <= 5){
+        print($human->name."さんの入場料金は ".$this->entry_fee["infant"]." 円です。".PHP_EOL);
+        }elseif($human->age <= 12){
+            print($human->name."さんの入場料金は ".$this->entry_fee["children"]." 円です。".PHP_EOL);
+        }elseif($human->age <= 64){
+            print($human->name."さんの入場料金は ".$this->entry_fee["adult"]." 円です。".PHP_EOL);
+        }elseif($human->age <= 120){
+            print($human->name."さんの入場料金は ".$this->entry_fee["senior"]." 円です。".PHP_EOL);
+      }
+    }
+    
 }
 
 $zoo = new Zoo("旭山動物園",["infant" => 0, "children" => 400, "adult" => 800, "senior" => 500]);
@@ -343,3 +434,25 @@ foreach($humans as $human){
 }
 
 echo PHP_EOL;
+?>
+
+<?php
+print("#####q21#####".PHP_EOL);
+
+  //rang() - 指定した範囲の値を持つ配列を作成する
+  foreach(range(1, 30) as $num) {
+    if($num % 21 == 0) {
+      echo "FizzHoge".PHP_EOL;
+    }elseif($num % 15 == 0) {
+      echo "FizzBuzz".PHP_EOL;
+    }elseif($num % 7 == 0) {
+      echo "Hoge".PHP_EOL;
+    }elseif($num % 5 == 0) {
+      echo "Buzz".PHP_EOL;
+    }elseif($num % 3 == 0) {
+      echo "Fizz".PHP_EOL;
+    }else{
+      echo $num.PHP_EOL;
+    }
+  }
+?>
