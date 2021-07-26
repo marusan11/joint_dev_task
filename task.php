@@ -211,7 +211,7 @@ print("#####q12#####".PHP_EOL);
 $data = ["user" => ["name" => "satou", "age" => 33]];
 
   # 以下に回答を記載
-  print_r($data[user][name]);
+  print_r($data["user"]["name"]);
 echo PHP_EOL;
 ?>
 
@@ -256,12 +256,12 @@ $data2 = ["name" => "yamada", "hobby" => "baseball", "role" => "normal"];
   # 以下に回答を記載
   //array_key_exists():配列の特定のキーの有無を調べる
   //array_key_exists(キー,対象の配列);
-  if(array_key_exists(age,$data1)){
+  if(array_key_exists("age",$data1)){
     print_r("OK".PHP_EOL);
   }else{
     print_r("NG".PHP_EOL);
 
-  }if(array_key_exists(age,$data2)){
+  }if(array_key_exists("age",$data2)){
     print_r("OK".PHP_EOL);
   }else{
     print_r("NG".PHP_EOL);
@@ -298,9 +298,9 @@ class User
   //constructメソッド(関数)作成
   //上記の変数の代入にならない様に変数名を$user_とつける。
   public function __construct($user_name,$user_age,$user_gender) {
-      $this->name = $user_name;
-      $this->age = $user_age;
-      $this->gender = $user_gender;
+    $this->name = $user_name;
+    $this->age = $user_age;
+    $this->gender = $user_gender;
   }
     
   public function info() {
@@ -330,17 +330,17 @@ print("#####q18#####".PHP_EOL);
     private $age;
 
     public function __construct($man_name,$man_age) {
-        $this->name = $man_name;
-        $this->age = $man_age;
+      $this->name = $man_name;
+      $this->age = $man_age;
     }
   
     public function introduce() {
       //if文で年齢を用いた場合分け
-        if($this->age >= 20) {
-          print("こんにちは,".$this->name."と申します。宜しくお願いいたします。".PHP_EOL);
-        }else{
-          print("はいさいまいど〜,".$this->name."です！！！".PHP_EOL);
-        }
+      if($this->age >= 20) {
+        print("こんにちは,".$this->name."と申します。宜しくお願いいたします。".PHP_EOL);
+      }else{
+        print("はいさいまいど〜,".$this->name."です！！！".PHP_EOL);
+      }
     }
 
   }
@@ -387,8 +387,8 @@ class Human
 
     //メソッド
     function __construct($user_name,$user_age) {
-        $this->name = $user_name;
-        $this->age = $user_age;
+      $this->name = $user_name;
+      $this->age = $user_age;
     }
 }
 
@@ -410,11 +410,11 @@ class Zoo
       if($human->age <= 5){
         print($human->name."さんの入場料金は ".$this->entry_fee["infant"]." 円です。".PHP_EOL);
         }elseif($human->age <= 12){
-            print($human->name."さんの入場料金は ".$this->entry_fee["children"]." 円です。".PHP_EOL);
+          print($human->name."さんの入場料金は ".$this->entry_fee["children"]." 円です。".PHP_EOL);
         }elseif($human->age <= 64){
-            print($human->name."さんの入場料金は ".$this->entry_fee["adult"]." 円です。".PHP_EOL);
+          print($human->name."さんの入場料金は ".$this->entry_fee["adult"]." 円です。".PHP_EOL);
         }elseif($human->age <= 120){
-            print($human->name."さんの入場料金は ".$this->entry_fee["senior"]." 円です。".PHP_EOL);
+          print($human->name."さんの入場料金は ".$this->entry_fee["senior"]." 円です。".PHP_EOL);
       }
     }
     
@@ -441,7 +441,11 @@ print("#####q21#####".PHP_EOL);
 
   //rang() - 指定した範囲の値を持つ配列を作成する
   foreach(range(1, 30) as $num) {
-    if($num % 21 == 0) {
+    if($num % 105 == 0){
+      echo "FizzBezzHoge".PHP_EOL;
+    }elseif($num % 35 == 0 ){
+      echo "BuzzHoge".PHP_EOL;
+    }elseif($num % 21 == 0) {
       echo "FizzHoge".PHP_EOL;
     }elseif($num % 15 == 0) {
       echo "FizzBuzz".PHP_EOL;
